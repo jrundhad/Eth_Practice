@@ -10,12 +10,17 @@ contract YourContract {
   event SetPurpose(address sender, string purpose);
 
   string public purpose = "Building Unstoppable Apps!!!";
+  
+  address public addr = 0xCA35b7d915458EF540aDe6068dFe2F44E8fa733c;
+  
 
   constructor() payable {
     // what should we do on deploy?
+
   }
 
-  function setPurpose(string memory newPurpose) public {
+  function setPurpose(string memory newPurpose) payable public {
+      require(msg.value >= 10, "pay more Ether to change purpose!"); 
       purpose = newPurpose;
       console.log(msg.sender,"set purpose to",purpose);
       emit SetPurpose(msg.sender, purpose);
