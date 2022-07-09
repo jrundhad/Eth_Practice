@@ -11,10 +11,18 @@ contract YourContract {
 
   string public purpose = "Building Unstoppable Apps!!!";
   
-  address public addr = 0xCA35b7d915458EF540aDe6068dFe2F44E8fa733c;
+  //initialize immutable
+  address public immutable ADDR;
+
+  string public greet = "Hello World!";
+
+  //how to declare a constant 
+  uint public constant MY_UINT = 123;
   
 
+  // set immutable variable in constructor
   constructor() payable {
+    ADDR = msg.sender;
     // what should we do on deploy?
 
   }
@@ -24,6 +32,27 @@ contract YourContract {
       purpose = newPurpose;
       console.log(msg.sender,"set purpose to",purpose);
       emit SetPurpose(msg.sender, purpose);
+  }
+
+  uint public timestamp = block.timestamp; // Current block timestamp
+  address public sender = msg.sender; // address of the caller
+
+  uint public count;
+
+  // Function to get the current count
+  function get() public view  returns (uint){
+      return count;
+  }
+
+  // Function to increment count by 1
+  function inc() public {
+      count += 1;
+  }
+
+  // Function to decrement count by 1
+  function dec() public {
+      // This function will fail if count = 0
+      count -= 1;
   }
 
   // to support receiving ETH by default
